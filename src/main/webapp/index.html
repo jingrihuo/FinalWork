@@ -1,55 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"  />
-    <title>知识分享与项目合作平台</title>
-    <script src="JS/jquery-3.2.1.min.js"></script>
-    <script src="JS/nav.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"  /><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/style.css">
-
+    <script src="JS/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="JS/bootstrap.min.js"></script>
 </head>
 <body>
-<div id="top_bg">
-    <div class="top">
-        <a class="logo_l" href="/FinalWork" title="返回首页"></a>
-        <!--导航开始-->
-        <div class="nav_z" style="float:right" >
-            <ul id="navul" class="cl">
-                <li>
-                    <a href="#">网站通告</a>
+<nav class="navbar navbar-fixed-top my-navbar" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="images/logo.png" height="18" width="300"/></a>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">iOS</a>
                 </li>
                 <li>
-                    <a href="#">功能介绍</a>
-                    <ul>
-                        <li><a href="#">知识问答</a></li>
-                        <li><a href="#">项目合作</a></li>
-                        <li><a href="#">项目管理</a></li>
-                    </ul>
+                    <a href="#">SVN</a>
                 </li>
                 <li>
-                    <a href="#">更多</a>
-                    <ul>
-                        <li><a href="#">网站吐槽</a></li>
-                        <li><a href="#">网站投票</a></li>
-                    </ul>
-                </li>
-                <!--可在此处直接添加导航-->
-                <li>
-                    <a href="#">登录</a>
-                </li>
-                <li>
-                    <a href="#">注册</a>
+                    <a href="#">Asp.Net</a>
                 </li>
             </ul>
-
-        </div><!--导航结束-->
-        <script  type="text/javascript">
-            $(".navbg").capacityFixed();
-        </script>
-
+        </div>
     </div>
-
-</div>
+</nav>
+<div class="bg"></div>
+<br/><br/><br/><br/><br/><br/><br/>
+<script>
+    $(window).scroll(function () {
+        if ($(".navbar").offset().top > 50) {
+            $(".navbar-fixed-top").addClass("top-nav");
+        } else {
+            $(".navbar-fixed-top").removeClass("top-nav");
+        }
+    })</script>
 </body>
 </html>

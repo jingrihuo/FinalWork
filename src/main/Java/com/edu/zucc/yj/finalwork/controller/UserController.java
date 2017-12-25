@@ -7,6 +7,7 @@ import com.edu.zucc.yj.finalwork.service.IUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -28,5 +29,15 @@ public class UserController {
         response.getWriter().write(mapper.writeValueAsString(user));
         response.getWriter().close();
     }
+
+    @RequestMapping("/login.do")
+    public ModelAndView login(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("login");
+        return mv;
+    }
+
+
+
 
 }
