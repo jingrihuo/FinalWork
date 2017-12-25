@@ -11,16 +11,17 @@ html, body {
     padding: 100px 0;
     text-align: center;
     color: #000;
-    background: url(../images/2.jpg) no-repeat center center;
+    background: url(../images/login_bg.jpg) no-repeat center center;
     background-color: #000;
     background-size: cover;
+    z-index:-1;
 }
 
 
 .my-navbar {
     padding: 20px 0;
     transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-    background: #000000;
+    background-color: transparent
 }
 
 .my-navbar a {
