@@ -17,4 +17,14 @@ public class UserServiceImpl implements IUserService{
     public User getSelectUser(String user_account) {
         return this.userDao.selectUser(user_account);
     }
+
+    @Override
+    public String getPassword(String user_account) {
+        return this.userDao.selectUserPassword(user_account);
+    }
+
+    @Override
+    public void addUser(User user) {
+        this.userDao.addUser(user);
+    }
 }

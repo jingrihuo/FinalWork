@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <!-- 扫描web相关的bean -->
     <context:component-scan base-package="com.edu.zucc.yj.finalwork.controller"/>
@@ -20,6 +20,16 @@
     <mvc:default-servlet-handler/>
 
     <mvc:resources location="/images/" mapping="/images/**"/>
+
+    <!-- 拦截器配置 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/user/login.do"/>
+            <mvc:exclude-mapping path="/user/registered.do"/>
+            <bean class="com.edu.zucc.yj.finalwork.interceptor.LoginHandlerIntercepter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!-- 配置jsp 显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

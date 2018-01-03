@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>大学生知识分享与项目合作</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/component.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="JS/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row myCenter">
+        <div style="margin-top: 10%;margin-left: 22%">
+            <a><img src="images/logo1.png" class="img-responsive" alt="Cinque Terre"/></a>
+        </div>
+        <div class="col-xs-6 col-md-4 col-center-block" style="margin-top: 5%">
+            <form class="form-signin" id="login">
+                <div class="input_outer">
+                    <span class="user_name"></span>
+                    <input type="text" id="username" name="username" class="text" placeholder="请输入你的手机号" required
+                           autofocus style="color: #000000 !important">
+                </div>
+                <div class="input_outer" id="password">
+                    <span class="user_password"></span>
+                    <input type="password" id="userpassword" name="userpassword" class="text" placeholder="请输入密码"
+                           required autofocus style="color: #000000 !important">
+                </div>
+                <div style="margin-left: 20px;margin-top: 10px;display: none" id="pwd_prompt">
+                    <p>密码长度最短6位最长15位</p>
+                    <p>包括至少1个大写字母，1个小写字母，1个数字</p>
+                </div>
+                <div class="input_outer">
+                    <span class="user_password"></span>
+                    <input type="password" id="re_userpassword" name="re_userpassword" class="text" placeholder="请重复你的密码"
+                           required autofocus style="color: #000000 !important">
+                </div>
+                <div class="input_outer">
+                    <span class="user_email"></span>
+                    <input type="text" id="useremail" name="useremail" class="text" placeholder="请输入你的工作邮箱" required
+                           autofocus style="color: #000000 !important">
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="button" onclick="check()">注册</button>
+            </form>
+            <div style="margin-top: 20px">
+                <input type="checkbox" id="rulescheck">
+                <h style="margin-left: 10px">我已经阅读</h>
+                <a onclick="webMSG()">网站通告</a>
+                <h style="float: right">已经拥有账号?<a href="login.html">点我登录</a></h>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true" onclick="send()">×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    注册失败
+                </h4>
+            </div>
+            <div class="modal-body">
+                <h4 id="result">
+
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal" onclick="send()">关闭
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#userpassword").focus(function () {
+            $("#pwd_prompt").fadeIn();
+            $("#password").css("margin-bottom", "0px");
+        });
+        $("#userpassword").blur(function () {
+            $("#pwd_prompt").hide();
+            $("#password").css("margin-bottom", "20px");
+        });
+    });
+
+    function check() {
+        if (!checkMobile($("#username").val())) {
+            return;
+        } else if (!checkPassword($("#userpassword").val())) {
+            return;
+        } else if (!checkRePassword($("#userpassword").val(),$("#re_userpassword").val())) {
+            return;
+        } else if (!checkEmail($("#useremail").val())) {
+            return;
+        }else if(!$("#rulescheck").is(':checked')){
+            $('#result').html("请仔细阅读网站通告并勾选已阅读");
+            $('#myModal').modal('show');
+            return;
+        }
+        registered();
+    }
+
+    function registered() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//服务端接收的数据类型
+            url: "/FinalWork/user/registered.do",//url
+            data: $('#login').serialize(),
+            success: function (result) {
+                var result = eval(result);
+                if (result.result.toString() != "succesful") {
+                    $('#result').html(result.result.toString());
+                    $('#myModal').modal('show');
+                } else {
+                    window.location.href = "/FinalWork";
+                }
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    }
+
+    function send() {
+        $('#myModal').modal('hide');
+        $('#myModalLabel').html("注册失败");
+    }
+
+    function checkMobile(mobile) {
+        if (mobile.length == 0) {
+            $('#result').html("手机号不可为空");
+            $('#myModal').modal('show');
+            return false;
+        }
+        if (mobile.length != 11) {
+            $('#result').html("请输入有效的手机号码！");
+            $('#myModal').modal('show');
+            return false;
+        }
+
+        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if (!myreg.test(mobile)) {
+            $('#result').html("请输入有效的手机号码！");
+            $('#myModal').modal('show');
+            return false;
+        }
+        return true;
+    }
+
+    function checkPassword(password) {
+        var pPattern = /^.*(?=.{6,15})(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).*$/;
+        if (password.length == 0) {
+            $('#result').html("密码不可为空");
+            $('#myModal').modal('show');
+            return false;
+        }
+
+        if (!pPattern.test(password)) {
+            $('#result').html("密码格式不对");
+            $('#myModal').modal('show');
+            return false;
+        }
+        return true;
+    }
+    function checkRePassword(password,repassword) {
+        if (repassword.length == 0){
+            $('#result').html("密码不可为空");
+            $('#myModal').modal('show');
+            return false;
+        }
+        if (repassword!=password){
+            $('#result').html("两次密码需保持一致");
+            $('#myModal').modal('show');
+            return false;
+        }
+        return true;
+    }
+
+    function checkEmail(email) {
+        if (email.length == 0){
+            $('#result').html("邮箱不可为空");
+            $('#myModal').modal('show');
+            return false;
+        }
+        var pattern = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/;
+        if(!pattern.test(email)){
+            $('#result').html("邮箱格式不对");
+            $('#myModal').modal('show');
+            return false;
+        }
+        return true;
+    }
+    
+    function webMSG() {
+        $('#myModalLabel').html("网站公告");
+        $('#result').html("网站服务器运行时间为每日8点半-23点半,请合理安排时间");
+        $('#myModal').modal('show');
+    }
+</script>
+</body>
+</html>

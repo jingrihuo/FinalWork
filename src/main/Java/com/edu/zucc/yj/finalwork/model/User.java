@@ -8,6 +8,7 @@ public class User {
     private String user_level;
     private String user_class;
     private String user_studentid;
+    private String user_state;
 
     public String getUser_account() {
         return user_account;
@@ -65,6 +66,14 @@ public class User {
         this.user_studentid = user_studentid;
     }
 
+    public String getUser_state() {
+        return user_state;
+    }
+
+    public void setUser_state(String user_state) {
+        this.user_state = user_state;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -75,6 +84,7 @@ public class User {
                 ", user_level='" + user_level + '\'' +
                 ", user_class='" + user_class + '\'' +
                 ", user_studentid='" + user_studentid + '\'' +
+                ", user_state='" + user_state + '\'' +
                 '}';
     }
 }
