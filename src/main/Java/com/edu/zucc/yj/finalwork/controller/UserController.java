@@ -45,7 +45,7 @@ public class UserController {
         password = MD5Util.MD5Encode(userpassword, "UTF-8").toUpperCase();
         if (user == null){
             result = "不存在该用户";
-        }else if(user.getUser_state()!=null){
+        }else if(user.getUser_banned()!=null){
             result = "该账号被封禁,详细情况请联系管理员";
         }else if (user.getUser_password().equals(password)){
             request.getSession().setAttribute("userId",username);

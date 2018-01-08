@@ -1,5 +1,7 @@
 package com.edu.zucc.yj.finalwork.model;
 
+import java.util.Date;
+
 public class User {
     private String user_account;
     private String user_password;
@@ -8,6 +10,7 @@ public class User {
     private String user_level;
     private String user_class;
     private String user_studentid;
+    private Date user_banned;
     private String user_state;
 
     public String getUser_account() {
@@ -66,6 +69,14 @@ public class User {
         this.user_studentid = user_studentid;
     }
 
+    public Date getUser_banned() {
+        return user_banned;
+    }
+
+    public void setUser_banned(Date user_banned) {
+        this.user_banned = user_banned;
+    }
+
     public String getUser_state() {
         return user_state;
     }
@@ -84,6 +95,7 @@ public class User {
                 ", user_level='" + user_level + '\'' +
                 ", user_class='" + user_class + '\'' +
                 ", user_studentid='" + user_studentid + '\'' +
+                ", user_banned=" + user_banned +
                 ", user_state='" + user_state + '\'' +
                 '}';
     }
