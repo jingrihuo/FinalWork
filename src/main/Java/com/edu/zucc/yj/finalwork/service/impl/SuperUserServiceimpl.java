@@ -24,6 +24,6 @@ public class SuperUserServiceimpl implements ISuperUserService{
 
     @Override
     public void bannedUser(User user) {
-        this.superUserDao.updateUser_banned(user);
+        this.superUserDao.bannedUser(user);
     }
 }

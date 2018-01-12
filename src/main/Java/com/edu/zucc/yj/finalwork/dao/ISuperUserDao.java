@@ -10,5 +10,5 @@ import com.edu.zucc.yj.finalwork.model.User;
  * @CreateDate: 2018/1/12
  */
 public interface ISuperUserDao {
-    void updateUser_banned(User user);
+    void bannedUser (User user);
 }

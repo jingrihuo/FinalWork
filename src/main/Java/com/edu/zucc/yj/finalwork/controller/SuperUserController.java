@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -31,13 +32,41 @@ public class SuperUserController {
 
     @RequestMapping("/banned.do")
     @ResponseBody
-    public JSONObject bannedUser(HttpServletRequest request){
+    /**
+     * @method  bannedUser
+     * @description 封禁用户
+     * @date: 2018/1/12
+     * @author: yuritian
+     * @param useraccount 用户账号
+     * @return JSONObject
+     */
+    public JSONObject bannedUser(HttpServletRequest request)throws IOException{
         JSONObject jsonObject = new JSONObject();
         String result = "封禁用户成功";
         Date bannedTime = new Date();
         bannedTime = new Date(bannedTime.getTime()+3 * 24 * 60 * 60 * 1000);
-        User user = this.userService.getSelectUser(request.getSession().getAttribute("userId").toString());
+        User user = this.userService.getSelectUser(request.getParameter("useraccount").toString());
         user.setUser_banned(bannedTime);
+        this.superUserService.bannedUser(user);
+        jsonObject.put("result", result);
+        return  jsonObject;
+    }
+
+    @RequestMapping("/unbanned.do")
+    @ResponseBody
+    /**
+     * @method  bannedUser
+     * @description 封禁用户
+     * @date: 2018/1/12
+     * @author: yuritian
+     * @param useraccount 用户账号
+     * @return JSONObject
+     */
+    public JSONObject unBannedUser(HttpServletRequest request)throws IOException{
+        JSONObject jsonObject = new JSONObject();
+        String result = "解封成功";
+        User user = this.userService.getSelectUser(request.getParameter("useraccount").toString());
+        user.setUser_banned(null);
         this.superUserService.bannedUser(user);
         jsonObject.put("result", result);
         return  jsonObject;

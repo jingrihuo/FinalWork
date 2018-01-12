@@ -3,6 +3,7 @@ package com.edu.zucc.yj.finalwork.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import com.edu.zucc.yj.finalwork.model.User;
+import com.edu.zucc.yj.finalwork.service.ISuperUserService;
 import com.edu.zucc.yj.finalwork.service.IUserService;
 import com.edu.zucc.yj.finalwork.utils.MD5Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +31,8 @@ import java.util.Date;
 @RequestMapping("/user")
 public class UserController {
 
+    @Resource
+    private ISuperUserService superUserService;
     @Resource
     private IUserService userService;
 
@@ -65,7 +68,15 @@ public class UserController {
         if (user == null) {
             result = "不存在该用户";
         } else if (user.getUser_banned() != null) {
-            result = "该账号被封禁,详细情况请联系管理员";
+            if (new Date().getTime()>user.getUser_banned().getTime()){
+                user.setUser_banned(null);
+                this.superUserService.bannedUser(user);
+                request.getSession().setAttribute("userId", useraccount);
+                request.getSession().setAttribute("userState",user.getUser_state());
+                result = "succesful";
+            }else {
+                result = "该账号被封禁,详细情况请联系管理员";
+            }
         } else if (user.getUser_password().equals(MD5password)) {
             request.getSession().setAttribute("userId", useraccount);
             request.getSession().setAttribute("userState",user.getUser_state());
@@ -120,7 +131,7 @@ public class UserController {
      * @param userstudentid
      * @return net.sf.json.JSONObject
      */
-    public JSONObject modifyUserInformation(HttpServletRequest request) {
+    public JSONObject modifyUserInformation(HttpServletRequest request)throws IOException {
         JSONObject jsonObject = new JSONObject();
         String result = "修改信息成功";
         String username = request.getParameter("username");

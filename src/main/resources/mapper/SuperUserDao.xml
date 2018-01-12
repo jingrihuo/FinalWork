@@ -3,7 +3,7 @@
 <!-- 设置为IUserDao接口方法提供sql语句配置 -->
 <mapper namespace="com.edu.zucc.yj.finalwork.dao.ISuperUserDao">
 
-    <update id="updateUser_banned" parameterType="com.edu.zucc.yj.finalwork.model.User">
+    <update id="bannedUser" parameterType="com.edu.zucc.yj.finalwork.model.User">
         UPDATE USER
         <set>
             user_banned = #{user_banned}
@@ -12,5 +12,6 @@
             user_account =  #{user_account}
         </where>
     </update>
+
 
 </mapper>
