@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @ProjectName: FinalWork
- * @ClassName: LoginHandlerIntercepter
- * @Description: 用户登录拦截器
+ * @ClassName: SuperUserHandlerIntercepter
+ * @Description: 超级管理员拦截器
  * @Author: YuJing
- * @CreateDate: 2018/1/10
+ * @CreateDate: 2018/1/12
  */
-
-public class LoginHandlerIntercepter implements HandlerInterceptor{
-    private static final String LOGIN_URL = "/FinalWork/login.html";
+public class SuperUserHandlerIntercepter implements HandlerInterceptor{
+    private static final String MAIN_URL = "/FinalWork/index.html";
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        if(request.getSession().getAttribute("userId") == null) {
-            System.out.println("调用了用户登录拦截器");
-            response.sendRedirect(LOGIN_URL);
+        System.out.println("调用了超级管理员拦截器");
+        if(!request.getSession().getAttribute("userState").toString().equals("管理员")) {
+            response.sendRedirect(MAIN_URL);
             return false;
         }
         return true;

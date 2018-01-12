@@ -1,5 +1,13 @@
 package com.edu.zucc.yj.finalwork.model;
 
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: Label
+ * @Description: 标签类
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
+
 public class Label {
     private int label_id;
     private String label_name;

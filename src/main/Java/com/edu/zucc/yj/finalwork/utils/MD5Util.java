@@ -2,6 +2,14 @@ package com.edu.zucc.yj.finalwork.utils;
 
 import java.security.MessageDigest;
 
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: MD5Util
+ * @Description: MD5加密工具类
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
+
 public class MD5Util {
 
 	private static String byteArrayToHexString(byte b[]) {

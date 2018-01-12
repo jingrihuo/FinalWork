@@ -46,14 +46,15 @@ create table share
 create table user
 (
    user_account         varchar(20) not null,
-   user_password        varchar(20),
+   user_password        varchar(40),
    user_email           varchar(40),
    user_name            varchar(10),
-   user_level           varchar(30000),
+   user_level           varchar(20000),
    user_class           varchar(20),
    user_studentid       varchar(10),
    user_banned          datetime,
    user_state           varchar(20),
+   user_note            varchar(400),
    primary key (user_account)
 );
 

@@ -1,5 +1,13 @@
 package com.edu.zucc.yj.finalwork.model;
 
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: Share
+ * @Description: 小组分享类
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
+
 public class Share {
     private int share_id;
     private int share_groupid;

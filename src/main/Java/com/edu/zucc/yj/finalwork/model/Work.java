@@ -2,6 +2,14 @@ package com.edu.zucc.yj.finalwork.model;
 
 import java.util.Date;
 
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: Work
+ * @Description: 任务类
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
+
 public class Work {
     private int work_id;
     private String work_name;

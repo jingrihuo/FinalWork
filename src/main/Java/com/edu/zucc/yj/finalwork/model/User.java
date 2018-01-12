@@ -2,6 +2,14 @@ package com.edu.zucc.yj.finalwork.model;
 
 import java.util.Date;
 
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: User
+ * @Description: 用户类
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
+
 public class User {
     private String user_account;
     private String user_password;
@@ -12,6 +20,7 @@ public class User {
     private String user_studentid;
     private Date user_banned;
     private String user_state;
+    private String user_note;
 
     public String getUser_account() {
         return user_account;
@@ -85,18 +94,13 @@ public class User {
         this.user_state = user_state;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "user_account='" + user_account + '\'' +
-                ", user_password='" + user_password + '\'' +
-                ", user_email='" + user_email + '\'' +
-                ", user_name='" + user_name + '\'' +
-                ", user_level='" + user_level + '\'' +
-                ", user_class='" + user_class + '\'' +
-                ", user_studentid='" + user_studentid + '\'' +
-                ", user_banned=" + user_banned +
-                ", user_state='" + user_state + '\'' +
-                '}';
+    public String getUser_note() {
+        return user_note;
     }
+
+    public void setUser_note(String user_note) {
+        this.user_note = user_note;
+    }
+
+
 }

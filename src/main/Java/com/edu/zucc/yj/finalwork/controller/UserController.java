@@ -16,6 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
+
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: UserController
+ * @Description: 用户操作控制器
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
 
 @Controller
 @RequestMapping("/user")
@@ -25,7 +34,6 @@ public class UserController {
     private IUserService userService;
 
     @RequestMapping("/showUser.do")
-
     public void selectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -37,46 +45,97 @@ public class UserController {
 
     @RequestMapping("/login.do")
     @ResponseBody
-    public JSONObject login(@RequestParam("username") String username, @RequestParam("userpassword") String userpassword,HttpServletRequest request) throws IOException{
+    /**
+     * @method  login
+     * @description 用户登录
+     * @date: 2018/1/12
+     * @author: yuritian
+     * @param username 用户账号
+     * @param userpassword 用户密码
+     * @return JSONObject
+     */
+    public JSONObject login(HttpServletRequest request) throws IOException {
         String result = "密码错误";
-        String password;
+        String useraccount = request.getParameter("useraccount");
+        String userpassword = request.getParameter("userpassword");
+        String MD5password;
         JSONObject jsonObject = new JSONObject();
-        User user = this.userService.getSelectUser(username);
-        password = MD5Util.MD5Encode(userpassword, "UTF-8").toUpperCase();
-        if (user == null){
+        User user = this.userService.getSelectUser(useraccount);
+        MD5password = MD5Util.MD5Encode(userpassword, "UTF-8").toUpperCase();
+        if (user == null) {
             result = "不存在该用户";
-        }else if(user.getUser_banned()!=null){
+        } else if (user.getUser_banned() != null) {
             result = "该账号被封禁,详细情况请联系管理员";
-        }else if (user.getUser_password().equals(password)){
-            request.getSession().setAttribute("userId",username);
+        } else if (user.getUser_password().equals(MD5password)) {
+            request.getSession().setAttribute("userId", useraccount);
+            request.getSession().setAttribute("userState",user.getUser_state());
             result = "succesful";
         }
-        jsonObject.put("result",result);
+        jsonObject.put("result", result);
         return jsonObject;
     }
 
     @RequestMapping("/registered.do")
     @ResponseBody
-    public JSONObject registered(@RequestParam("username") String username, @RequestParam("userpassword") String userpassword,@RequestParam("useremail") String useremail)throws IOException{
+    /**
+     * @method  registered
+     * @description 描述一下方法的作用
+     * @date: 2018/1/12
+     * @author: yuritian
+     * @param username 用户账号
+     * @param userpassword 用户密码
+     * @param useremail 用户邮箱
+     * @return JSONObject
+     */
+    public JSONObject registered(HttpServletRequest request) throws IOException {
         JSONObject jsonObject = new JSONObject();
+        String useraccount = request.getParameter("useraccount");
+        String userpassword = request.getParameter("userpassword");
+        String useremail = request.getParameter("useremail");
         String result = "已经存在该用户";
-        User user = this.userService.getSelectUser(username);
-        if (user == null){
+        User user = this.userService.getSelectUser(useraccount);
+        if (user == null) {
             user = new User();
-            user.setUser_account(username);
+            user.setUser_account(useraccount);
             String MD5_Password = MD5Util.MD5Encode(userpassword, "UTF-8").toUpperCase();
             user.setUser_password(MD5_Password);
             user.setUser_email(useremail);
             this.userService.addUser(user);
             result = "succesful";
         }
-        jsonObject.put("result",result);
+        jsonObject.put("result", result);
         return jsonObject;
     }
 
-
-
-
+    @RequestMapping("/modifyUserInformation.do")
+    @ResponseBody
+    /**
+     * @method  addUserInformation
+     * @description 描述一下方法的作用
+     * @date: 2018/1/12
+     * @author: yuritian
+     * @param username
+     * @param useremail
+     * @param userclass
+     * @param userstudentid
+     * @return net.sf.json.JSONObject
+     */
+    public JSONObject modifyUserInformation(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        String result = "修改信息成功";
+        String username = request.getParameter("username");
+        String useremail = request.getParameter("useremail");
+        String userclass = request.getParameter("userclass");
+        String userstudentid = request.getParameter("userstudentid");
+        User user = this.userService.getSelectUser(request.getSession().getAttribute("userId").toString());
+        user.setUser_name(username);
+        user.setUser_email(useremail);
+        user.setUser_class(userclass);
+        user.setUser_studentid(userstudentid);
+        this.userService.modifyUser(user);
+        jsonObject.put("result",result);
+        return jsonObject;
+    }
 
 
 }

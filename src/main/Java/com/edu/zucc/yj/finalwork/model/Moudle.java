@@ -1,5 +1,13 @@
 package com.edu.zucc.yj.finalwork.model;
 
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: Moudle
+ * @Description: 任务模块类
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
+
 public class Moudle {
     private int moudle_id;
     private String moudle_name;

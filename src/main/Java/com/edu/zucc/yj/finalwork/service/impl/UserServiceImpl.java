@@ -7,6 +7,14 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: IUserService
+ * @Description: 实现用户操作接口
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
+
 @Service("userService")
 public class UserServiceImpl implements IUserService{
 
@@ -27,4 +35,10 @@ public class UserServiceImpl implements IUserService{
     public void addUser(User user) {
         this.userDao.addUser(user);
     }
+
+    @Override
+    public void modifyUser(User user) {
+        this.userDao.updateUser(user);
+    }
+
 }

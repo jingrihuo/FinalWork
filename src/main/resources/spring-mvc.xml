@@ -25,9 +25,14 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/user/**"/>
+            <mvc:mapping path="/superUser/**"/>
             <mvc:exclude-mapping path="/user/login.do"/>
             <mvc:exclude-mapping path="/user/registered.do"/>
             <bean class="com.edu.zucc.yj.finalwork.interceptor.LoginHandlerIntercepter"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/superUser/**"/>
+            <bean class="com.edu.zucc.yj.finalwork.interceptor.SuperUserHandlerIntercepter"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

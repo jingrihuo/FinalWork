@@ -1,5 +1,13 @@
 package com.edu.zucc.yj.finalwork.model;
 
+/**
+ * @ProjectName: FinalWork
+ * @ClassName: Groups
+ * @Description: 小组类
+ * @Author: YuJing
+ * @CreateDate: 2018/1/10
+ */
+
 public class Groups {
     private int group_id;
     private String group_leaderid;//小组组长

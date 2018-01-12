@@ -22,7 +22,7 @@
             <form class="form-signin" id="login">
                 <div class="input_outer">
                     <span class="user_name"></span>
-                    <input type="text" id="username" name="username" class="text" placeholder="请输入账户" required autofocus style="color: #000000 !important">
+                    <input type="text" id="useraccount" name="useraccount" class="text" placeholder="请输入账户" required autofocus style="color: #000000 !important">
                 </div>
                 <div class="input_outer">
                     <span class="user_password"></span>
@@ -63,7 +63,7 @@
 </div><
 <script type="text/javascript">
     function check() {
-        if ($("#username").val()==''){
+        if ($("#useraccount").val()==''){
             $('#result').html("账户不可为空");
             $('#myModal').modal('show');
             return;

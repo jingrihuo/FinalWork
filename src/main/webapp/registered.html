@@ -22,7 +22,7 @@
             <form class="form-signin" id="login">
                 <div class="input_outer">
                     <span class="user_name"></span>
-                    <input type="text" id="username" name="username" class="text" placeholder="请输入你的手机号" required
+                    <input type="text" id="useraccount" name="useraccount" class="text" placeholder="请输入你的手机号" required
                            autofocus style="color: #000000 !important">
                 </div>
                 <div class="input_outer" id="password">
@@ -93,7 +93,7 @@
     });
 
     function check() {
-        if (!checkMobile($("#username").val())) {
+        if (!checkMobile($("#useraccount").val())) {
             return;
         } else if (!checkPassword($("#userpassword").val())) {
             return;
